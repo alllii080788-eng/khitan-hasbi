@@ -1,0 +1,618 @@
+j<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Khitanan - Hasbi Syahrul Ramadhan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        amber: {
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        arabic: ['Amiri', 'serif'],
+                        script: ['Great Vibes', 'cursive'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#065f46 0.6px, transparent 0.6px), radial-gradient(#065f46 0.6px, #f8fafc 0.6px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border-image: linear-gradient(to bottom right, #fbbf24, #d97706, #fbbf24) 1;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-900 antialiased selection:bg-amber-500 selection:text-slate-900 min-h-screen relative overflow-x-hidden">
+
+    <div id="audio-control" class="fixed bottom-6 right-6 z-50 hidden">
+        <button id="music-toggle" onclick="toggleMusic()" class="w-13 h-13 p-3.5 rounded-full bg-emerald-900 text-amber-400 shadow-2xl border-2 border-amber-400/80 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300">
+            <i id="music-icon" class="fas fa-music text-lg animate-spin"></i>
+        </button>
+        <audio id="bg-music" loop>
+            <source src="https://archive.org/download/langkah-awal-penuh-berkah/Langkah_Awal_Penuh_Berkah.mp3">
+        </audio>
+    </div>
+
+    <div id="welcome-modal" class="fixed inset-0 z-50 bg-emerald-950/95 backdrop-blur-lg flex items-center justify-center p-4 transition-all duration-700">
+        <div class="max-w-md w-full bg-slate-900/90 border-2 border-amber-500/50 rounded-3xl p-8 text-center text-slate-100 shadow-2xl relative overflow-hidden my-auto backdrop-blur-md">
+            
+            <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-emerald-500/20 rounded-full blur-3xl"></div>
+
+            <!-- Islamic Bismillah Decorative Header -->
+            <div class="text-amber-400 font-arabic text-2xl mb-3">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </div>
+
+            <p class="text-amber-400 font-semibold tracking-widest uppercase text-[11px] mb-4">Undangan Digital Khitanan</p>
+            
+            <!-- Foto Anak Cover -->
+            <div class="relative w-36 h-36 mx-auto mb-4">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500 via-emerald-600 to-amber-300 animate-spin" style="animation-duration: 10s;"></div>
+                <div class="absolute inset-1 rounded-full overflow-hidden border-2 border-slate-900 bg-emerald-950">
+                    <img src="<a href="https://ibb.co.com/DfmFb3k5"><img src="https://i.ibb.co.com/YBJSWv8p/foto-hasbi.jpg" alt="foto-hasbi" border="0"></a>">
+                </div>
+            </div>
+
+            <h1 class="font-script text-4xl text-amber-300 mb-1">Hasbi Syahrul Ramadhan</h1>
+            <p class="text-xs text-slate-300 font-medium mb-5">Putra ke-4 Bpk. Dani & Ibu Siti Patimah (Mmh Diba)</p>
+
+            <div class="bg-slate-800/80 rounded-2xl p-4 border border-amber-500/30 mb-6">
+                <p class="text-[11px] text-slate-400 mb-1">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                <p id="guest-name" class="text-base font-bold text-amber-300">Tamu Undangan</p>
+            </div>
+
+            <button id="open-btn" onclick="openInvitation()" class="w-full py-3.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-slate-950 font-extrabold rounded-xl shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                <i class="fas fa-envelope-open text-slate-950"></i> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <div id="main-content" class="hidden bg-slate-50 text-slate-800">
+
+        <header class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+            
+            <div class="relative z-10 max-w-2xl mx-auto space-y-6 my-auto py-12">
+                <div class="text-amber-400 font-arabic text-3xl sm:text-4xl mb-2">
+                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                </div>
+                <p class="text-xs sm:text-sm text-emerald-200 tracking-widest uppercase font-bold">Walimatul Khitan</p>
+                
+                <!-- Frame Foto Utama -->
+                <div class="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto my-6">
+                    <div class="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-500 blur-sm opacity-80 animate-pulse-slow"></div>
+                    <div class="relative w-full h-full rounded-full border-4 border-amber-400 overflow-hidden shadow-2xl bg-emerald-950">
+                        <img src="foto hasbi.jpg" alt="Hasbi Syahrul Ramadhan" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='https://placehold.co/400x400/064e3b/fbbf24?text=Hasbi';">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-amber-400 font-bold text-lg sm:text-xl">" Hasbi "</p>
+                    <h1 class="font-script text-5xl sm:text-7xl gold-gradient-text drop-shadow-lg">Hasbi Syahrul Ramadhan</h1>
+                    <p class="text-xs sm:text-sm text-slate-300 pt-2 font-medium">Putra keempat dari Bpk. Dani & Ibu Siti Patimah (Mmh Diba)</p>
+                </div>
+
+                <div class="max-w-lg mx-auto bg-slate-900/80 border border-amber-500/40 p-5 rounded-2xl shadow-xl space-y-2 mt-6 backdrop-blur-sm">
+                    <i class="fas fa-quote-left text-amber-400/40 text-2xl"></i>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
+                        "Ya Allah, muliakanlah anak kami ini, panjangkanlah umurnya, terangilah hatinya, teguhkanlah imannya, perbaikilah amal perbuatannya, lapangkanlah rejekinya, dekatkanlah pada kebaikan, dan jauhkanlah dari keburukan."
+                    </p>
+                </div>
+
+                <div class="pt-6">
+                    <a href="#acara" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-amber-300 border border-amber-400/40 bg-amber-500/10 px-6 py-3 rounded-full hover:bg-amber-400 hover:text-slate-950 transition duration-300 font-bold">
+                        <span>Lihat Jadwal Acara</span>
+                        <i class="fas fa-arrow-down animate-bounce"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section id="acara" class="py-20 px-4 bg-slate-100 pattern-bg">
+            <div class="max-w-4xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-3">
+                    <p class="text-emerald-800 font-extrabold text-xs uppercase tracking-widest">Informasi Pelaksanaan</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-sans">Rangkaian Acara</h2>
+                    <p class="text-slate-600 text-sm max-w-xl mx-auto">
+                        <strong>Assalamualaikum Warahmatullahi Wabarakatuh</strong><br>
+                        Dengan memohon Rahmat dan Ridho Allah SWT kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Khitanan putra kami yang insya Allah akan diselenggarakan pada:
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900 text-white p-8 rounded-3xl shadow-2xl text-center space-y-5 border border-amber-500/30">
+                    <div class="flex justify-center items-center gap-2 text-amber-400">
+                        <i class="fas fa-hourglass-half text-sm"></i>
+                        <p class="text-xs uppercase tracking-widest font-bold">Hitung Mundur Hari H Khitanan</p>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3 max-w-md mx-auto">
+                        <div class="bg-slate-900/80 border border-amber-500/20 p-3 sm:p-4 rounded-2xl shadow-inner">
+                            <span id="cd-days" class="text-2xl sm:text-4xl font-black text-amber-400">00</span>
+                            <p class="text-[10px] sm:text-xs text-slate-300 font-medium mt-1">Hari</p>
+                        </div>
+                        <div class="bg-slate-900/80 border border-amber-500/20 p-3 sm:p-4 rounded-2xl shadow-inner">
+                            <span id="cd-hours" class="text-2xl sm:text-4xl font-black text-amber-400">00</span>
+                            <p class="text-[10px] sm:text-xs text-slate-300 font-medium mt-1">Jam</p>
+                        </div>
+                        <div class="bg-slate-900/80 border border-amber-500/20 p-3 sm:p-4 rounded-2xl shadow-inner">
+                            <span id="cd-minutes" class="text-2xl sm:text-4xl font-black text-amber-400">00</span>
+                            <p class="text-[10px] sm:text-xs text-slate-300 font-medium mt-1">Menit</p>
+                        </div>
+                        <div class="bg-slate-900/80 border border-amber-500/20 p-3 sm:p-4 rounded-2xl shadow-inner">
+                            <span id="cd-seconds" class="text-2xl sm:text-4xl font-black text-amber-400">00</span>
+                            <p class="text-[10px] sm:text-xs text-slate-300 font-medium mt-1">Detik</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    
+                    <!-- Card 1: Utama Khitanan -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-4 relative overflow-hidden">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800">Acara Khitanan</h3>
+                        <div class="space-y-2 text-slate-600 text-sm">
+                            <p class="flex items-start gap-2">
+                                <i class="fas fa-clock text-emerald-800 mt-1"></i>
+                                <span><strong>Waktu:</strong> Sabtu - Minggu, 24 - 25 Oktober 2026</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <i class="fas fa-stopwatch text-emerald-800 mt-1"></i>
+                                <span><strong>Jam:</strong> 08.00 WIB s/d selesai</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Acara Pengajian -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-4 relative overflow-hidden">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-mosque"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800">Acara Pengajian</h3>
+                        <div class="space-y-2 text-slate-600 text-sm">
+                            <p class="flex items-start gap-2">
+                                <i class="fas fa-moon text-amber-600 mt-1"></i>
+                                <span><strong>Waktu:</strong> Minggu Malam Senin</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <i class="fas fa-user-tie text-amber-600 mt-1"></i>
+                                <span><strong>Penceramah:</strong> KH. Asep Subhan (Gsp Joglo)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg text-center space-y-6">
+                    <div class="max-w-xl mx-auto space-y-2">
+                        <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold uppercase">Lokasi Acara</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Alamat Lengkap</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            <i class="fas fa-map-marker-alt text-amber-600 mr-1"></i>
+                            <strong>Kp. Tegallega RT/RW 003/001, Desa Sirnajaya, Kec. Sukamakmur, Kab. Bogor</strong>
+                        </p>
+                    </div>
+
+                    <!-- Scan Barcode Display -->
+                    <div class="p-6 bg-slate-50 border border-dashed border-emerald-300 rounded-2xl inline-block max-w-sm mx-auto shadow-inner space-y-3">
+                        <p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Scan QR Code Navigasi Maps</p>
+                        <div class="w-48 h-48 mx-auto bg-white p-2 rounded-xl border border-slate-200 shadow-sm">
+                            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co.com/1tF98Ldv/scan-lokasi-titik-acara.jpg" alt="scan lokasi titik acara" border="0"></a><br /><a target='_blank' href='https://id.imgbb.com/'>unggah gambar avif</a><br />">
+                        </div>
+                        <p class="text-[11px] text-slate-500">Arahkan kamera HP Anda ke QR Code untuk membuka petunjuk arah di Google Maps.</p>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="addToCalendar()" class="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-sm shadow-md transition">
+                            <i class="far fa-calendar-plus text-base"></i> Simpan ke Google Calendar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 px-4 bg-white">
+            <div class="max-w-5xl mx-auto space-y-10">
+                <div class="text-center space-y-3">
+                    <div class="inline-block p-3 rounded-full bg-emerald-100 text-emerald-800">
+                        <i class="fas fa-hand-holding-heart text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Pengangkat Hajat</h2>
+                    <p class="text-slate-500 text-sm max-w-xl mx-auto">Segenap keluarga yang memiliki hajat dan mengundang kehadiran Anda:</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="hajat-container">
+                    <!-- Cards Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-4 bg-slate-100 pattern-bg">
+            <div class="max-w-5xl mx-auto space-y-8">
+                <div class="text-center space-y-3">
+                    <div class="inline-block p-3 rounded-full bg-amber-100 text-amber-600">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Turut Mengundang</h2>
+                    <p class="text-slate-500 text-sm max-w-xl mx-auto">Para tokoh masyarakat, keluarga, dan kerabat yang turut mengharapkan keikutsertaan Anda:</p>
+                    
+                    <!-- Search Input Filter -->
+                    <div class="max-w-md mx-auto pt-4">
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+                            <input type="text" id="search-mengundang" onkeyup="filterTurut()" placeholder="Cari nama atau daftar..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-slate-300 text-sm focus:outline-none focus:border-emerald-800 shadow-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="mengundang-container">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-4 bg-slate-900 text-white relative">
+            <div class="max-w-2xl mx-auto space-y-8 relative z-10">
+                <div class="text-center space-y-2">
+                    <h2 class="text-4xl font-bold font-script text-amber-300">Form Ucapan & Doa Restu</h2>
+                    <p class="text-slate-400 text-sm">Tuliskan pesan doa dan ucapan hangat untuk Ananda Hasbi Syahrul Ramadhan</p>
+                </div>
+
+                <form id="wish-form" onsubmit="submitWish(event)" class="space-y-4 bg-slate-800/90 p-6 sm:p-8 rounded-3xl border border-slate-700 shadow-2xl backdrop-blur-md">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap / Instansi</label>
+                        <input type="text" id="wish-name" required placeholder="Contoh: Bpk. Ahmad" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Konfirmasi Kehadiran</label>
+                        <select id="wish-status" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400 text-sm">
+                            <option value="Hadir">Insya Allah Hadir</option>
+                            <option value="Tidak Hadir">Halangan / Tidak Hadir</option>
+                            <option value="Ragu-ragu">Masih Ragu-ragu</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Doa Restu & Ucapan</label>
+                        <textarea id="wish-message" rows="3" required placeholder="Tuliskan doa terbaik Anda di sini..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-slate-950 font-extrabold rounded-xl transition shadow-lg text-sm">
+                        Kirim Ucapan
+                    </button>
+                </form>
+
+                <div id="wishes-list" class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                    <!-- Live List from LocalStorage -->
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 px-4 bg-emerald-950 text-slate-200 text-center space-y-8 border-t border-amber-500/30">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <i class="fas fa-heart text-amber-400 text-3xl"></i>
+                <p class="text-sm sm:text-base leading-relaxed italic text-slate-300">
+                    "Kehadiran adalah silaturahmi, restu adalah doa cinta kasih, keikhlasan adalah ketulusan hati. Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada anak kami."
+                </p>
+                
+                <div class="text-amber-400 font-arabic text-xl pt-2">
+                    وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+                </div>
+
+                <div class="pt-6 border-t border-emerald-900/80 max-w-lg mx-auto space-y-4">
+                    <p class="text-xs uppercase tracking-widest text-amber-400 font-bold">Kami Yang Berbahagia</p>
+                    <div class="space-y-3 text-xs sm:text-sm">
+                        <div class="bg-emerald-900/40 p-4 rounded-xl border border-emerald-800">
+                            <p class="font-bold text-amber-300 text-base">Bpk. Dani</p>
+                            <p class="text-slate-300 text-[11px] mt-0.5">Kel. Besar Bpk. Subki & Ibu Badriah (Umi Tiah) (Cipicung-Tegallega)</p>
+                        </div>
+                        <div class="bg-emerald-900/40 p-4 rounded-xl border border-emerald-800">
+                            <p class="font-bold text-amber-300 text-base">Ibu Siti Patimah (Mmh Diba)</p>
+                            <p class="text-slate-300 text-[11px] mt-0.5">Kel. Besar Bapak: Judi (Alm) & Ibu: Onih (Alm) / Bapak: Mail (Alm) (Cipanas)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="pt-8 space-y-3">
+                    <p class="text-[11px] uppercase tracking-widest text-slate-400">Bagikan Undangan Ini</p>
+                    <div class="flex justify-center gap-3">
+                        <button onclick="shareWhatsApp()" class="px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg transition">
+                            <i class="fab fa-whatsapp text-sm"></i> WhatsApp
+                        </button>
+                        <button onclick="copyLink()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg transition border border-slate-700">
+                            <i class="fas fa-copy text-sm"></i> Salin Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-[10px] text-slate-500 pt-8">
+                &copy; 2026 Undangan Digital Khitanan Hasbi Syahrul Ramadhan
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Data Pengangkat Hajat
+        const pengangkatHajat = [
+            { nama: "Bpk. Nean (Ismail)", hubungan: "Kakak Cariu" },
+            { nama: "Bpk. Eman (Caok)", hubungan: "Kakak Tegallega" },
+            { nama: "Bpk. Iim", hubungan: "Kakak Talaga/Pasir Pari" },
+            { nama: "Bpk. Yadi", hubungan: "Kakak Cipanas" },
+            { nama: "Bpk. Ramlan", hubungan: "Kakak Cibubur" },
+            { nama: "Bpk. Endang Abd. Rahmat", hubungan: "Kakak Cibubur" },
+            { nama: "Andri (PLN)", hubungan: "Adik Tegallega" },
+            { nama: "Hapiz", hubungan: "Adik Tegallega" },
+            { nama: "Habudin", hubungan: "Paman Tegallega" },
+            { nama: "Bpk. Acun", hubungan: "Paman Tegallega" },
+            { nama: "Bpk. Jamin", hubungan: "Paman Tegallega" },
+            { nama: "Bakri (Penjual air galon)", hubungan: "Saudara Pasir Pari" }
+        ];
+
+        // Data Turut Mengundang
+        const turutMengundang = [
+            "Bpk. Idim Dimyati (Kades Sirnajaya)",
+            "Bpk. Ooy Tamami (Kades Wargajaya)",
+            "Bpk. Nana Suryana (Kades Hormat)",
+            "Bpk. H. Tinggi Zaelani (Tokoh Kebon Danas)",
+            "Bpk. Mulyani (Sekdes Sirnajaya)",
+            "Bpk. Dadan (Kebon Danas)",
+            "Bpk. Aye Rusmana (Kebon Danas)",
+            "Bpk. Asep (Burik) (Ketua RT.003)",
+            "Bpk. Mus (Ketua RW.001)",
+            "Bpk. RT Uday (Kebon Danas)",
+            "Kel. Besar Wa Kiyut (Pamokolan)",
+            "Bpk. Engkos (Paman Cisoro)",
+            "Bpk. Lumat (Paman Tegallega)",
+            "Bpk. H. Rohili (Tokoh Cipicung)",
+            "Bpk. Acep Aripin (Ust. Cipicung)",
+            "Bpk. Juparsa (Ketua Yayasan MIS Cipicung)",
+            "Bpk. Azis Munandar (Kepala Sekolah MIS Cipicung)",
+            "Bpk. Dayat (Ust. Cipicung)",
+            "Bpk. Oman (Paman Cipicung)",
+            "Bpk. Abdurohman (Kakak Lampung)",
+            "Bpk. H. Deni (Ketua Yayasan Solalatul Huda)",
+            "Bpk. Daniel (Tokoh Tegallega)",
+            "BPK. Azis Muhaemin (Tokoh Tegallega)",
+            "Bpk. H. Ridwan (Tokoh Ust. Kebon Danas)",
+            "Bpk. Agus (Ust. Kebon Danas)",
+            "Bpk. Amid (Melati Jonggol)",
+            "Kel. Besar Bebedahan - Slajambu (Cipanas)",
+            "Alumni SMP Sukamakmur 2 Angkatan 2003",
+            "Kepala Sekolah & Staf SDN Sirnajaya 02",
+            "Bpk. Yanto (PT. LMM Loka Cipta Cibubur)",
+            "Karyawan Taman Bunga Nusantara (Cipanas)",
+            "Bpk. Ust. Eeh Nasihin (Tokoh Babakan Petir)",
+            "Abah (Pimpinan Ponpes Lebak Pulus)",
+            "Bpk. Ridwan (Cipanas)",
+            "Bpk. H. Asep Subhan (Pimpinan Ponpes Ma'had Minhajul Mubtadi'in Cipanas)",
+            "Bpk. Duking (Paman Cipicung)",
+            "Alumni SDN Cibodas Angkatan 2009",
+            "Alumni SMP Negeri 1 Pacet Angkatan 2012",
+            "Pemuda IRIS",
+            "Para Simpatisan"
+        ];
+
+        // Render Cards Pengangkat Hajat
+        function renderHajat() {
+            const container = document.getElementById('hajat-container');
+            container.innerHTML = pengangkatHajat.map((item, index) => `
+                <div class="bg-slate-50 hover:bg-emerald-50/60 p-4 rounded-2xl border border-slate-200 hover:border-emerald-300 transition duration-300 flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-emerald-800 text-amber-400 flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm">
+                        ${index + 1}
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm">${item.nama}</h4>
+                        <p class="text-xs text-emerald-700 font-medium">${item.hubungan}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render List Turut Mengundang
+        function renderTurut(items) {
+            const container = document.getElementById('mengundang-container');
+            if (items.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 col-span-full text-center py-4">Nama tidak ditemukan...</p>`;
+                return;
+            }
+            container.innerHTML = items.map(nama => `
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 text-xs text-slate-700 flex items-center gap-2.5 hover:shadow-sm transition">
+                    <i class="fas fa-check-circle text-amber-500 shrink-0"></i>
+                    <span class="font-medium">${nama}</span>
+                </div>
+            `).join('');
+        }
+
+        function filterTurut() {
+            const query = document.getElementById('search-mengundang').value.toLowerCase();
+            const filtered = turutMengundang.filter(item => item.toLowerCase().includes(query));
+            renderTurut(filtered);
+        }
+
+        // URL Guest Param Handler (?to=Nama)
+        function getGuestName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const to = urlParams.get('to');
+            if (to) {
+                document.getElementById('guest-name').innerText = decodeURIComponent(to);
+            }
+        }
+
+        // Audio & Modal Control
+        let isPlaying = false;
+        const bgMusic = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('fa-music', 'animate-spin');
+                musicIcon.classList.add('fa-pause');
+            } else {
+                bgMusic.play().catch(e => console.log("Autoplay constraint"));
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-music', 'animate-spin');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function openInvitation() {
+            document.getElementById('welcome-modal').classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                document.getElementById('welcome-modal').style.display = 'none';
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('audio-control').classList.remove('hidden');
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                }).catch(() => {
+                    isPlaying = false;
+                    musicIcon.classList.remove('animate-spin');
+                    musicIcon.classList.add('fa-pause');
+                });
+            }, 500);
+        }
+
+        // Countdown Timer Logic
+        const targetDate = new Date("October 24, 2026 08:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('cd-hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('cd-minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('cd-seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+
+        // LocalStorage Wishes Feed Logic
+        function loadWishes() {
+            const savedWishes = JSON.parse(localStorage.getItem('hasbi_wishes') || '[]');
+            const list = document.getElementById('wishes-list');
+            
+            const defaultWishes = [
+                { name: "Keluarga Besar", status: "Hadir", message: "Selamat untuk Ananda Hasbi Syahrul Ramadhan. Semoga menjadi anak yang sholeh, berbakti kepada orang tua, berguna bagi agama dan bangsa." }
+            ];
+
+            const allWishes = [...savedWishes, ...defaultWishes];
+
+            list.innerHTML = allWishes.map(item => `
+                <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-1">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-amber-300 text-xs">${escapeHtml(item.name)}</span>
+                        <span class="text-[10px] bg-emerald-900/80 text-emerald-300 px-2.5 py-0.5 rounded-full font-semibold">${escapeHtml(item.status)}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(item.message)}</p>
+                </div>
+            `).join('');
+        }
+
+        function submitWish(e) {
+            e.preventDefault();
+            const name = document.getElementById('wish-name').value;
+            const status = document.getElementById('wish-status').value;
+            const message = document.getElementById('wish-message').value;
+
+            const newWish = { name, status, message };
+            const savedWishes = JSON.parse(localStorage.getItem('hasbi_wishes') || '[]');
+            savedWishes.unshift(newWish);
+            localStorage.setItem('hasbi_wishes', JSON.stringify(savedWishes));
+
+            loadWishes();
+            document.getElementById('wish-form').reset();
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // Calendar Share Action
+        function addToCalendar() {
+            const title = encodeURIComponent("Khitanan Hasbi Syahrul Ramadhan");
+            const details = encodeURIComponent("Acara khitanan putra Bpk. Dani & Ibu Siti Patimah (Mmh Diba)");
+            const location = encodeURIComponent("Kp. Tegallega RT/RW 003/001, Desa Sirnajaya, Kec. Sukamakmur, Kab. Bogor");
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=20261024T010000Z/20261025T110000Z`;
+            window.open(url, '_blank');
+        }
+
+        // WhatsApp and Link Share
+        function shareWhatsApp() {
+            const text = encodeURIComponent("Assalamu'alaikum Wr. Wb. Kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Khitanan Hasbi Syahrul Ramadhan. Silakan buka tautan undangan digital kami berikut:");
+            const url = window.location.href;
+            window.open(`https://api.whatsapp.com/send?text=${text}%20${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function copyLink() {
+            const tempInput = document.createElement("input");
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Link undangan berhasil disalin!");
+        }
+
+        // On Load Init
+        window.onload = function() {
+            renderHajat();
+            renderTurut(turutMengundang);
+            getGuestName();
+            updateCountdown();
+            loadWishes();
+        };
+    </script>
+</body>
+</html>
